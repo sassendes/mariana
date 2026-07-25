@@ -1,0 +1,32 @@
+[package]
+name = "mariana"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.75"
+description = "A durable key-value store with a small binary protocol"
+license = "MIT"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "net", "io-util", "sync", "time", "macros", "signal"] }
+crossbeam-skiplist = "0.1"
+parking_lot = "0.12"
+crc32c = "0.6"
+ahash = "0.8"
+sha2 = "0.10"
+subtle = "2"
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive"] }
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
